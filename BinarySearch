@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void binarySearch(int arr[],int low,int high,int key){
+    // cout<<"run"<<endl;
+    int midindex = (low+high)/2;
+    int mid = arr[midindex];
+    int ans;
+    int flag=0;
+    // cout<<low<<" "<<midindex<<" "<<high<<endl;
+    if(low>=high){
+        cout<<"Element not found"<<endl;
+        return;
+    }
+    if(key==mid){
+        cout<<"ELement present at index :"<<midindex<<endl;
+        return;
+    }
+    if(key<mid){
+        binarySearch(arr,low,midindex-1,key);
+    }
+    else if(key>mid){
+        binarySearch(arr,midindex+1,high,key);
+    }
+}
+
+int main(){
+
+    int n;
+    cin>>n;
+    int arr[n];
+    clock_t start,end;
+
+    for(int i=0;i<n;i++){
+        arr[i]= rand()%5000;
+    }
+    int key = rand()%5000;
+    cout<<"Element Searched :"<<key<<endl;
+    start = clock();
+    sort(arr,arr+n);
+    binarySearch(arr,0,n,key);
+    end = clock();
+
+    double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
+
+    cout << "Time taken by program is : " << fixed
+         << time_taken << setprecision(5);
+    cout << " sec" << endl;
+
+    return 0;
+}
